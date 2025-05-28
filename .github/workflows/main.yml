@@ -39,7 +39,7 @@ jobs:
           mlflow run ./MLproject --env-manager=local -P csv_url=$CSV_URL
 
       - name: Set up Git LFS
-         run: |
+        run: |
            git config --global user.name ${{ secrets.username }}
            git config --global user.email ${{ secrets.email }}
            git lfs install
