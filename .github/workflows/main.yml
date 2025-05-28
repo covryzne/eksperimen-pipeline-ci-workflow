@@ -34,7 +34,7 @@ jobs:
 
       - name: Run mlflow project
         run: |
-          mlflow run . --env-manager=local -P csv_url=$CSV_URL
+          mlflow run ./MLproject --env-manager=local -P csv_url=$CSV_URL
 
       - name: Save mlruns to repo
         run: |
