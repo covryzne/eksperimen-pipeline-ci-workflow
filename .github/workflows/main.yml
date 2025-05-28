@@ -54,6 +54,8 @@ jobs:
           export MLFLOW_TRACKING_URI=file://$(pwd)/mlruns
           export MLFLOW_LOG_LEVEL=DEBUG
           git lfs pull
+          ls -la MLproject/ || echo "MLproject folder not found"
+          ls -la MLproject/train_pca.csv || echo "train_pca.csv not found"
           mlflow run ./MLproject --env-manager=local -P dataset=$DATASET
 
       - name: Check mlruns
