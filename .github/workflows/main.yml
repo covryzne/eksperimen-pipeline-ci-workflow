@@ -31,10 +31,10 @@ jobs:
           git commit -m "Add Git LFS tracking for mlruns .pkl files" || echo "No changes to commit"
           git push origin main || echo "Push failed"
 
-      - name: Set up Python 3.12.7
+      - name: Set up Python 3.11
         uses: actions/setup-python@v4
         with:
-          python-version: "3.12.7"
+          python-version: "3.11"
 
       - name: Check Env
         run: |
@@ -43,7 +43,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install mlflow==2.22.0 pandas==2.2.3 numpy==2.2.4 scikit-learn==1.6.1 scipy==1.15.3 cloudpickle==3.1.1 psutil==6.1.0 git-lfs
+          pip install mlflow==2.17.0 pandas==2.2.3 numpy==2.1.1 scikit-learn==1.5.2 scipy==1.14.1 cloudpickle==3.1.0 psutil==6.1.0 git-lfs
 
       - name: Clean mlruns
         run: |
@@ -52,8 +52,9 @@ jobs:
       - name: Run mlflow project
         run: |
           export MLFLOW_TRACKING_URI=file://$(pwd)/mlruns
+          export MLFLOW_LOG_LEVEL=DEBUG
           git lfs pull
-          mlflow run ./MLproject --env-manager=local -P dataset=$DATASET --verbose
+          mlflow run ./MLproject --env-manager=local -P dataset=$DATASET
 
       - name: Check mlruns
         run: |
